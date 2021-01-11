@@ -1,0 +1,47 @@
+.RecipeDisplayPanel {
+  display: flex;
+  padding: 7rem 5rem 1.5rem 5rem;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  background-color: inherit;
+}
+
+.RecipeDisplayPanel .Serving {
+  margin-left: 8rem;
+}
+
+.RecipeDisplayPanel strong {
+  font-size: inherit;
+}
+
+/* .RecipeDisplayPanel .Serving button {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.3rem;
+  border-radius: 50%;
+  border: solid red 1px;
+  position: relative;
+  top: -11%;
+  left: 10%;
+} */
+
+.Serving button:last-child {
+  margin-left: 0.2rem;
+}
+
+.RecipeDisplayPanel .Bookmark {
+  margin-left: auto;
+  width: 4.5rem;
+  height: 5rem;
+  position: relative;
+  top: -1rem;
+}
+
+.RecipeDisplayPanel .Bookmark:hover {
+  cursor: pointer;
+}
+
+.RecipeDisplayPanel .Bookmark.True {
+  color: rgb(253, 84, 84);
+}

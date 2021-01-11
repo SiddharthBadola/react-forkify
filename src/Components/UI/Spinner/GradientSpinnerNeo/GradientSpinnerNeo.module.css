@@ -1,0 +1,54 @@
+.Loader {
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+  top: -5rem;
+  border: 4px solid #f1f1f1;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: -10px -10px 15px rgba(255, 255, 255, 0.5),
+    10px 10px 10px rgba(0, 0, 0, 0.1),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.2),
+    inset 10px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.Loader::before {
+  content: "";
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  z-index: 10;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  box-shadow: inset -10px -10px 15px rgba(255, 255, 255, 0.5),
+    inset 10px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.Loader span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  /* background: linear-gradient(#14ffe4, #ffeb3b, #ff0030); */
+  background: linear-gradient(
+    transparent,
+    transparent 60%,
+    #14ffe4 60%,
+    #00509b
+  );
+
+  filter: blur(20px);
+  animation: animate 1s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

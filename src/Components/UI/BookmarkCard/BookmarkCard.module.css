@@ -1,0 +1,85 @@
+.BookmarkCard {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  height: 100%;
+  /* height: 40vw; */
+  background: radial-gradient(
+    at bottom right,
+    rgba(88, 88, 88, 0.8),
+    rgba(151, 151, 151, 0.8)
+  );
+
+  font-size: 10rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 8px 8px 12px rgba(114, 113, 113, 0.404);
+}
+
+.BookmarkCard figure::after {
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: block;
+  position: absolute;
+  background: radial-gradient(
+    at bottom right,
+    rgba(0, 114, 190, 0.1),
+    rgba(0, 255, 242, 0.1)
+  );
+  z-index: 20;
+}
+
+.BookmarkCard figure {
+  height: 60%;
+  width: 100%;
+  position: relative;
+}
+
+.BookmarkCard figure img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.BookmarkCard figure figcaption {
+  z-index: 50;
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  transform: translate(-2%, -22%) skewY(-12deg);
+}
+
+.BookmarkCard figure figcaption h3 span {
+  box-decoration-break: clone;
+  background: linear-gradient(
+    to right bottom,
+    rgba(235, 116, 19, 0.952),
+    rgba(253, 41, 17, 0.973)
+  );
+  padding: 1.2rem;
+  color: white;
+}
+
+.BookmarkCard .Publisher {
+  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 2.6rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba(116, 235, 19, 0.89),
+    rgba(253, 41, 17, 0.973)
+  );
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  z-index: 50;
+}

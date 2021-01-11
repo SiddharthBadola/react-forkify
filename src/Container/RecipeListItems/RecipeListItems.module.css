@@ -1,0 +1,125 @@
+.RecipeListItems {
+  grid-column: 1/2;
+  font-size: 4rem;
+  /* border: black solid 1px; */
+  background-color: white;
+  min-width: 20rem;
+  padding: 2rem 0.5rem;
+  padding-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .RecipeListItems {
+    grid-column: 1/-1;
+    grid-row: 2;
+    padding: 2.5rem 7rem;
+    position: relative;
+  }
+}
+
+.Hide {
+  display: none;
+}
+
+.RecipeListItems button {
+  border-radius: 30%;
+  border: none;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  height: 4rem;
+  background-color: rgb(121, 0, 151);
+}
+
+.RecipeListItems button:focus {
+  outline: none;
+}
+
+.RecipeListItems button span {
+  display: inline-block;
+  font-size: 2rem;
+  align-items: center;
+  position: relative;
+  top: -10%;
+}
+
+.RecipeListItems button:hover {
+  background-color: rgb(79, 0, 99);
+}
+
+.RecipeListItems .HideContainer {
+  padding: 0;
+}
+
+.RecipeListItems .Hide {
+  display: none !important;
+}
+
+.RecipeListItems .BtnContainer {
+  width: 100%;
+  position: relative;
+  height: 4rem;
+  margin-top: auto;
+}
+
+.RecipeListItems .Left {
+  position: absolute;
+  left: 5%;
+  top: 0;
+  bottom: 0;
+}
+
+.RecipeListItems .Left span {
+  margin-right: 0.5rem;
+}
+
+.RecipeListItems .Right {
+  position: absolute;
+  right: 5%;
+  top: 0;
+  bottom: 0;
+}
+
+.RecipeListItems .Right span {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .RecipeListItems .BtnContainer {
+    width: 0;
+    height: 0;
+    position: static;
+    margin: 0;
+  }
+
+  .RecipeListItems .Left {
+    position: absolute;
+    left: 0;
+    top: 45%;
+    bottom: 45%;
+  }
+
+  .RecipeListItems .Right {
+    position: absolute;
+    right: 0;
+    top: 45%;
+    bottom: 45%;
+  }
+
+  .RecipeListItems .Desktop {
+    display: none;
+  }
+
+  .RecipeListItems .Mobile svg {
+    height: 9rem;
+    color: tomato;
+  }
+
+  .RecipeListItems button,
+  .RecipeListItems button:hover {
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,31 @@
+.RecipeDisplay {
+  grid-column: 2/-1;
+  background-image: inherit;
+  grid-row: 2;
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .RecipeDisplay {
+    grid-column: 1/-1;
+    grid-row: 3;
+  }
+}
+
+.RecipeDisplay .Ingredients {
+  font-size: 3.5rem;
+  text-align: center;
+  padding: 3rem 3rem;
+  background-color: inherit;
+}
+
+.RecipeDisplay .Ingredients h2 {
+  background: linear-gradient(
+    to bottom right,
+    rgb(61, 61, 61),
+    rgb(95, 95, 95)
+  );
+  background-clip: text;
+  color: transparent;
+  font-size: 2.8rem;
+}

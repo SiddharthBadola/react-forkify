@@ -1,0 +1,8 @@
+.Ingredient {
+  list-style: none;
+  font-size: 1.6rem;
+}
+
+/* .Ingredient:not(:last-child) {
+  margin-bottom: 1.7rem;
+} */

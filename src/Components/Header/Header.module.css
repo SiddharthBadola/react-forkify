@@ -1,0 +1,133 @@
+.Header {
+  grid-column: 1/4;
+  width: 100%;
+  z-index: 100;
+  /* border: black solid 1px; */
+  background: linear-gradient(rgb(61, 61, 61), rgb(95, 95, 95));
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  --burger-icon-menu-background-color: #fff;
+  font-size: 3.8rem;
+}
+
+.Header {
+  display: grid;
+  /* grid-template-columns: max-content 1fr minmax(25rem, 45rem) 1fr minmax(
+      33rem,
+      1fr
+    ); */
+  grid-template-columns: max-content 1fr minmax(25rem, 45rem) 1fr max-content;
+  /* gap: 0 1rem; */
+  align-items: center;
+  /* position: sticky;
+  top: 0; */
+}
+
+.Header .Menu {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .Header {
+    grid-template-columns: max-content minmax(15rem, 1fr) max-content;
+    gap: 1rem;
+  }
+
+  .Header .Nav {
+    grid-column: 3;
+  }
+}
+
+@media (max-width: 599px) {
+  /* .Header {
+    gap: 1.5rem;
+  } */
+
+  .Header .Nav {
+    display: none;
+  }
+
+  .Header .Menu {
+    display: block;
+    grid-column: 1;
+    height: 0.8rem;
+    width: 3rem;
+    background-color: var(--burger-icon-menu-background-color);
+    position: relative;
+    margin-right: 3rem;
+  }
+  .Header .Menu::after {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    display: block;
+    height: 0.8rem;
+    width: 3rem;
+    background-color: var(--burger-icon-menu-background-color);
+  }
+
+  .Header .Menu::before {
+    content: "";
+    position: absolute;
+    bottom: -1rem;
+    display: block;
+    height: 0.8rem;
+    width: 3rem;
+    background-color: var(--burger-icon-menu-background-color);
+  }
+
+  .Header {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0;
+  }
+}
+
+.HeaderFixed {
+  position: fixed;
+  top: 0;
+  max-width: 110rem;
+  margin: auto;
+  height: 8rem;
+  animation: slide-in-top 0.7s ease-out;
+  background: linear-gradient(rgba(61, 61, 61, 0.897), rgba(95, 95, 95, 0.904));
+  /* opacity: 0.9; */
+  border-radius: 0;
+}
+
+/* .Header .Logo {
+  grid-column: 1;
+} */
+.Header .SearchBar {
+  grid-column: 3;
+  /* grid-column: 2; */
+  align-self: center;
+  font-size: 2.3rem;
+  position: relative;
+}
+
+@media only screen and (max-width: 850px) {
+  .Header .SearchBar {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media only screen and (max-width: 451px) {
+  .Header .SearchBar {
+    position: static;
+  }
+}
+
+.Header .Nav {
+  grid-column: 5;
+}
+
+@keyframes slide-in-top {
+  0% {
+    top: -100px;
+  }
+  100% {
+    top: 0;
+  }
+}

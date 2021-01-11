@@ -108,7 +108,7 @@ export const submit = (submitData, login, history) => {
           );
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response.data.error.message);
           dispatch(authFail(error));
         });
     }
@@ -162,5 +162,13 @@ export const checkStateToken = () => {
 
       fetchSummaryForBookmark(getState().recipe.bookmark)(dispatch);
     }
+  };
+};
+
+// To rest error when an user has already viewed the error and clicks the (create account/already have an account) button
+
+export const authResetError = () => {
+  return {
+    type: actionTypes.AUTH_RESET_ERROR,
   };
 };

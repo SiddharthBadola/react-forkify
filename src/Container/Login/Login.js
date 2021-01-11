@@ -41,12 +41,23 @@ class Login extends React.Component {
         login: !prevState.login,
       };
     });
+    this.props.resetError();
   };
 
   render() {
     // console.log(this.props);
+
+    let errorMessage = null;
+    if (this.props.error)
+      errorMessage = (
+        <p className={classes.Error}>
+          {this.props.error.response.data.error.message}
+        </p>
+      );
+
     let content = (
       <div className={classes.Container}>
+        {errorMessage}
         <form onSubmit={this.onSubmitHandler}>
           <input
             type="text"
@@ -64,12 +75,13 @@ class Login extends React.Component {
             {this.state.login ? "LOGIN" : "SIGNUP"}
           </button>
         </form>
-        <button onClick={this.onClickHandler}>Create An Account</button>
+        <button onClick={this.onClickHandler}>
+          {this.state.login ? "Create An Account" : "Already Have an Account"}
+        </button>
       </div>
     );
 
     if (this.props.loading) content = <Spinner />;
-
     return <div className={classes.Login}>{content}</div>;
   }
 }
@@ -87,6 +99,7 @@ const mapDispatchToProps = (dispatch) => {
     onSubmit: (submitData, login, history) =>
       dispatch(actions.submit(submitData, login, history)),
     onSignout: (history) => dispatch(actions.authSignOut(history)),
+    resetError: () => dispatch(actions.authResetError()),
   };
 };
 

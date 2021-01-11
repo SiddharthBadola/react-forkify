@@ -34,6 +34,10 @@ const authInit = (state, action) => {
   return updateObject(state, { token: action.token, userId: action.userId });
 };
 
+const authResetError = (state) => {
+  return updateObject(state, { error: null });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -46,6 +50,8 @@ const reducer = (state = initialState, action) => {
       return authSignOut(state);
     case actionTypes.AUTH_INIT:
       return authInit(state, action);
+    case actionTypes.AUTH_RESET_ERROR:
+      return authResetError(state);
     default:
       return state;
   }

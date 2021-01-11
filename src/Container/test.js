@@ -23,5 +23,5 @@ class Test extends React.Component {
     );
   }
 }
-
+const a = "b",
 export default Test;

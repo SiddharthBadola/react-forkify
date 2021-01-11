@@ -6,7 +6,7 @@ export {
   pageDecrementHandler,
 } from "./recipeList";
 
-export { authSignOut, submit, checkStateToken } from "./auth";
+export { authSignOut, submit, checkStateToken, authResetError } from "./auth";
 
 export {
   updateBookmark,

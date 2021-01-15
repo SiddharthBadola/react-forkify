@@ -1,0 +1,83 @@
+.Container {
+  /* width: 75%; */
+  width: 100%;
+  font-size: inherit;
+  height: 3rem;
+  position: relative;
+  transition: opacity 0.2s ease-out;
+  /* grid-column: 2/1; */
+
+  --pading: 2rem;
+  --padding-medium: 2rem 1.5rem;
+}
+
+.Input {
+  padding: var(--pading);
+  width: 100%;
+  border: none;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 1.5rem;
+}
+.Input::placeholder {
+  font-size: 1.3rem;
+}
+
+.Valid::before {
+  content: "";
+  padding: var(--pading);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(35, 112, 199, 0.863);
+  display: block;
+  border-radius: 0.5rem;
+  filter: blur(5px);
+  opacity: 0;
+}
+
+.Invalid::before {
+  content: "";
+  position: absolute;
+  padding: var(--pading);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(216, 30, 17, 0.863);
+  display: block;
+  border-radius: 0.5rem;
+  filter: blur(5px);
+}
+
+.Input:focus {
+  outline: none;
+}
+
+.Valid:focus-within::before {
+  opacity: 1;
+}
+
+@media (max-width: 975px) {
+  .Input::placeholder {
+    font-size: 1.2rem;
+  }
+  .Input {
+    padding: var(--padding-medium);
+  }
+
+  .Invalid::before {
+    padding: var(--padding-medium);
+  }
+
+  .Valid::before {
+    padding: var(--padding-medium);
+  }
+}

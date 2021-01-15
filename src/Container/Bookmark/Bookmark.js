@@ -15,6 +15,7 @@ class Bookmark extends React.Component {
     ) {
       this.props.fetchSummary(this.props.bookmark);
     }
+    // this.props.recipeListResetError();
   }
   componentDidUpdate(prevProps) {
     // console.log("[Bookmark.js] ComponentDidUpdate");
@@ -69,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchSummary: (bookmark) =>
       dispatch(actions.fetchSummaryForBookmark(bookmark)),
+    // recipeListResetError: () => dispatch(actions.recipeListResetError()),
   };
 };
 

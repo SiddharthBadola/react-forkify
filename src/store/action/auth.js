@@ -3,6 +3,7 @@ import {
   recipeUpdateBookmarkOnReload,
   fetchBookmarkOnInit,
   fetchSummaryForBookmark,
+  fetchUserRecipe,
   // recipeSetSummaryForBookmark,
 } from "./recipe";
 import axios from "axios";
@@ -76,14 +77,20 @@ export const submit = (submitData, login, history) => {
           submitData
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           dispatch(authSuccess(response.data.idToken, response.data.localId));
           dispatch(authAutoSignOutOnExpiresIn(response.data.expiresIn));
           // history.push("/");
           history.goBack();
           settingLocalStorage(response);
+
+          //fetch bookmark on login
           dispatch(
             fetchBookmarkOnInit(response.data.idToken, response.data.localId)
+          );
+          // fetch userRecipe on login
+          dispatch(
+            fetchUserRecipe(response.data.idToken, response.data.localId)
           );
         })
         .catch((error) => {
@@ -98,7 +105,7 @@ export const submit = (submitData, login, history) => {
           submitData
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           dispatch(authSuccess(response.data.idToken, response.data.localId));
           dispatch(authAutoSignOutOnExpiresIn(response.data.expiresIn));
           history.push("/");
@@ -152,15 +159,22 @@ export const checkStateToken = () => {
             getState().auth.token
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           dispatch(recipeUpdateBookmarkOnReload(response.data));
+
+          // fetching summary on reload
+          fetchSummaryForBookmark(getState().recipe.bookmark)(dispatch);
         })
         .catch((error) => {
           console.log(error);
         });
-      // fetching summary on reload
-
-      fetchSummaryForBookmark(getState().recipe.bookmark)(dispatch);
+      // Fetch userRecipeOnReload
+      dispatch(
+        fetchUserRecipe(
+          localStorage.getItem("token"),
+          localStorage.getItem("userId")
+        )
+      );
     }
   };
 };

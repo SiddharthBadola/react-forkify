@@ -1,0 +1,19 @@
+.Modal {
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  /* height: 80vh;
+  width: 80vw; */
+  z-index: 1000;
+  opacity: 1;
+  border-radius: 2.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.Hide {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}

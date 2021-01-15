@@ -27,7 +27,7 @@ export const fetchSummary = (id) => {
     axios
       .get(`https://forkify-api.herokuapp.com/api/get?rId=${id}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         // console.log(res.data.recipe);
         dispatch(recipeListSearchSuccess(res.data.recipe));
 
@@ -51,5 +51,13 @@ export const pageIncrementHandler = () => {
 export const pageDecrementHandler = () => {
   return {
     type: actionTypes.PAGE_DECREMENT,
+  };
+};
+
+// Setting the error to null when we visit the bookmark page so that the we can visit the user recipe summary on reload
+
+export const recipeListResetError = () => {
+  return {
+    type: actionTypes.RECIPELIST_RESET_ERROR,
   };
 };

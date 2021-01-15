@@ -1,0 +1,25 @@
+.AddRecipe {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 20rem));
+  grid-auto-rows: 35rem;
+  gap: 4rem 4rem;
+  width: 100%;
+  justify-content: center;
+  padding: 4rem;
+}
+
+@media (max-width: 750px) {
+  .AddRecipe {
+    grid-auto-rows: 30rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .AddRecipe {
+    padding: 2rem 0.5rem;
+  }
+  .AddRecipe {
+    grid-auto-rows: 25rem;
+  }
+}

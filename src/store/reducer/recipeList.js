@@ -32,6 +32,10 @@ const pageDecrementHandler = (state) => {
   return updateObject(state, { currentPage: state.currentPage - 1 });
 };
 
+const resetError = (state) => {
+  return updateObject(state, { error: null });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.RECIPELIST_SEARCH_SUMMARY_START:
@@ -44,6 +48,8 @@ const reducer = (state = initialState, action) => {
       return pageIncrementHandler(state);
     case actionTypes.PAGE_DECREMENT:
       return pageDecrementHandler(state);
+    case actionTypes.RECIPELIST_RESET_ERROR:
+      return resetError(state);
     default:
       return state;
   }

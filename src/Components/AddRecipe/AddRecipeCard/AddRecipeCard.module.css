@@ -1,0 +1,21 @@
+.AddRecipeCard {
+  background: radial-gradient(
+    at bottom right,
+    rgba(88, 88, 88, 0.8),
+    rgba(189, 187, 187, 0.8)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+}
+
+.AddRecipeCard:hover {
+  cursor: pointer;
+}
+
+.AddRecipeCard span {
+  font-size: 5rem;
+  color: white;
+  font-weight: 800;
+}

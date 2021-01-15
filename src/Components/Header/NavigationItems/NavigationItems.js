@@ -9,7 +9,7 @@ const navigationItems = (props) => {
     <ul className={classes.NavigationItems}>
       {props.auth ? (
         <React.Fragment>
-          <NavigationItem content="Add Recipe" link="/my-recipe">
+          <NavigationItem content="Add Recipe" link="/add-recipe">
             <PlusIcon />
           </NavigationItem>
           <NavigationItem content="Bookmark" link="/bookmark">

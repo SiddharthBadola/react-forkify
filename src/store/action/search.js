@@ -64,7 +64,7 @@ export const fetchRecipe = (currentSearch, searching, history) => {
     axios
       .get(`https://forkify-api.herokuapp.com/api/search?q=${currentSearch}`)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (searching) {
           dispatch(recipeSearchSuccessMobile(res.data));
         } else {

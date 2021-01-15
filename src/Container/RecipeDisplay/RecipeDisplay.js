@@ -10,16 +10,33 @@ import RecipeDisplayHeader from "../../Components/RecipeDisplay/RecipeDisplayHea
 import RecipeDisplayPanel from "../../Components/RecipeDisplay/RecipeDisplayPanel/RecipeDisplayPanel";
 
 class RecipeDisplay extends React.Component {
+  state = {
+    currentUserRecipe: this.props.userRecipe.some(
+      (recipe) => recipe.id === this.props.match.params.id
+    )
+      ? this.props.userRecipe.find(
+          (recipe) => recipe.id === this.props.match.params.id
+        )
+      : null,
+  };
+
+  userRecipeChecker() {
+    return /userRecipe/.test(this.props.match.params.id);
+  }
+
   componentDidMount() {
     // console.log("[RecipeDisplay.js] componentDidMount");
-    this.props.onFetchSummary(this.props.match.params.id);
-    this.props.onInitIsBookmarked(this.props.match.params.id);
+    if (!this.userRecipeChecker()) {
+      // console.log("inside if");
+      this.props.onFetchSummary(this.props.match.params.id);
+      this.props.onInitIsBookmarked(this.props.match.params.id);
+    }
     // if (this.props.auth) {
     //   this.props.onFetchBookmarkOnInit(this.props.token, this.props.userId);
     // }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     // console.log("[RecipeDisplay.js] componentDidUpdate");
     if (prevProps.match.params.id !== this.props.match.params.id) {
       // console.log("inside condidtion 1");
@@ -30,18 +47,51 @@ class RecipeDisplay extends React.Component {
       // console.log("inside condition 2");
       this.props.onInitIsBookmarked(this.props.match.params.id);
     }
+    if (this.props.userRecipe.length) {
+      if (
+        (!this.state.currentUserRecipe && this.userRecipeChecker()) ||
+        (this.userRecipeChecker() &&
+          prevState.currentUserRecipe !== this.state.currentUserRecipe)
+      ) {
+        // this.props.recipeListResetError();
+        // console.log("inside condition 3");
+        this.setState({
+          currentUserRecipe: this.props.userRecipe.find(
+            (recipe) => recipe.id === this.props.match.params.id
+          ),
+        });
+      }
+    }
   }
+
   render() {
-    // console.log(this.props);
     const id = this.props.match.params.id;
     let recipeDisplay = null;
 
-    if (!this.props.loading && !this.props.error)
+    if (
+      (Boolean(this.state.currentUserRecipe) || !this.props.loading) &&
+      (Boolean(this.state.currentUserRecipe) || !this.props.error)
+    )
       recipeDisplay = (
         <div className={classes.RecipeDisplay}>
           <RecipeDisplayHeader
-            imageUrl={this.props.recipeSummary.image_url}
-            title={this.props.recipeSummary.title}
+            // imageUrl={this.props.recipeSummary.image_url}
+            imageUrl={
+              this.userRecipeChecker()
+                ? this.state.currentUserRecipe.image_url
+                : this.props.recipeSummary.image_url
+            }
+            // title={this.props.recipeSummary.title}
+            title={
+              this.userRecipeChecker()
+                ? this.state.currentUserRecipe.title
+                : this.props.recipeSummary.title
+            }
+            userRecipe={
+              this.userRecipeChecker()
+                ? this.state.currentUserRecipe.userRecipe
+                : false
+            }
           />
           <RecipeDisplayPanel
             updateBookmark={this.props.updateBookmark}
@@ -50,15 +100,34 @@ class RecipeDisplay extends React.Component {
             // bookmark={this.props.bookmark}
             auth={this.props.auth}
             token={this.props.token}
+            userRecipe={
+              this.userRecipeChecker()
+                ? this.state.currentUserRecipe.userRecipe
+                : false
+            }
           />
 
           <div className={classes.Ingredients}>
             <h2>Recipe Ingredients</h2>
-            <Ingredients ingredients={this.props.recipeSummary.ingredients} />
+            <Ingredients
+              ingredients={
+                this.userRecipeChecker()
+                  ? this.state.currentUserRecipe.ingredients
+                  : this.props.recipeSummary.ingredients
+              }
+            />
           </div>
           <RecipeDisplayFooter
-            link={this.props.recipeSummary.source_url}
-            publisher={this.props.recipeSummary.publisher}
+            link={
+              this.userRecipeChecker()
+                ? this.state.currentUserRecipe.source_url
+                : this.props.recipeSummary.source_url
+            }
+            publisher={
+              this.userRecipeChecker()
+                ? this.state.currentUserRecipe.publisher
+                : this.props.recipeSummary.publisher
+            }
           />
         </div>
       );
@@ -67,7 +136,12 @@ class RecipeDisplay extends React.Component {
     if (this.props.error)
       recipeDisplay = <p>{this.props.error.response.data.message}</p>;
 
-    if (this.props.loading) recipeDisplay = <Spinner />;
+    if (this.props.loading && !this.userRecipeChecker())
+      recipeDisplay = (
+        <div className={classes.RecipeDisplay}>
+          <Spinner />
+        </div>
+      );
     return recipeDisplay;
   }
 }
@@ -82,6 +156,7 @@ const mapStateToProps = (state) => {
     auth: Boolean(state.auth.token),
     token: state.auth.token,
     userId: state.auth.userId,
+    userRecipe: state.recipe.userRecipe,
   };
 };
 
@@ -93,6 +168,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actions.updateBookmark(id, isBookmarked, auth, token)),
     onFetchBookmarkOnInit: (token, userId) =>
       dispatch(actions.fetchBookmarkOnInit(token, userId)),
+    recipeListResetError: () => dispatch(actions.recipeListResetError()),
   };
 };
 

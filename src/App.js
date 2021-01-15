@@ -11,6 +11,7 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./Container/Login/Login";
 import Bookmark from "./Container/Bookmark/Bookmark";
 import RecipeDisplay from "./Container/RecipeDisplay/RecipeDisplay";
+import AddRecipe from "./Components/AddRecipe/AddRecipe";
 
 class App extends React.Component {
   constructor(props) {
@@ -54,73 +55,6 @@ class App extends React.Component {
   inputChangeHandler = (e) => {
     this.setState({ input: e.target.value });
   };
-
-  // submitInputHandler = (e) => {
-  //   e.preventDefault();
-  //   if (!this.state.input) return;
-  //   console.log(this.state.input);
-  //   this.props.getRecipe(this.state.input, this.props.searching);
-  //   //   document.getElementById("Header-Input").blur();
-  //   // this.setState({ loading: true });
-  //   //   thispropstate({ loading: true });
-  //   //   axios
-  //   //     .get(`https://forkify-api.herokuapp.com/api/search?q=${this.state.input}`)
-  //   //     .then((res) => {
-  //   //       console.log(res.data);
-  //   //       if (this.state.searching) {
-  //   //         this.setState({
-  //   //           recipe: res.data,
-  //   //           error: null,
-  //   //          loading: false,
-  //   //     loading: false,
-  //   //           searching: false,
-  //   //         });
-  //   //         document.getElementById("Header-Input").value = "";
-  //   //       } else {
-  //   //this.setState({ recipe: res.data, error: null, loading: false });
-  //   //         this.setState({ recipe: res.data, eprops null, loading: false });
-  //   //         document.getElementById("Header-Input").value = "";
-  //   //       }
-  //   //     })
-  //   //     .catch((err) => {
-  //   //       console.log(err);
-  //   //       document.getElementById("Header-Input").value = "";
-  //   //       if (this.state.searching) {
-  //   //this.setState({ error: err, loading: false, searching: false });
-  //   //         this.setState({ props: err, loading: false, searching: false });
-  //   //         document.getElementById("Header-Input").value = "";
-  //   //       } else {
-  //   //this.setState({ error: err, loading: false });
-  //   //         this.setState({ props: err, loading: false });
-  //   //         document.getElementById("Header-Input").value = "";
-  //   //       }
-  //   //     });
-  // };
-
-  // pageIncrementHandler = () => {
-  //   const page = this.state.currentPage;
-  //   this.setState({ currentPage: page + 1 });
-  // };
-
-  // pageDecrementHandler = () => {
-  //   const page = this.state.currentPage;
-  //   this.setState({ currentPage: page - 1 });
-  // };
-
-  // displayRecipeSummaryHandler = (id) => {
-  //   return function () {
-  //     axios
-  //       .get(`https://forkify-api.herokuapp.com/api/get?rId=${id}`)
-  //       .then((res) => {
-  //         // console.log(res.data.recipe);
-  //         this.setState({ recipeSummary: res.data.recipe });
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //         this.setState({ error: err });
-  //       });
-  //   }.bind(this);
-  // };
 
   componentWillUnmount() {
     // console.log("[App.js] componentDidUnmount");
@@ -175,6 +109,7 @@ class App extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/bookmark" component={Bookmark} />
           <Route path="/summary:id" component={RecipeDisplay} />
+          <Route path="/add-recipe" component={AddRecipe} />
         </Switch>
       </div>
     );

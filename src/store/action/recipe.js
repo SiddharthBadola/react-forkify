@@ -172,3 +172,91 @@ export const fetchSummaryForBookmark = (bookmark) => {
     });
   };
 };
+
+// Actions for AddRecipe page i.e. managing the userRecipe state
+
+const recipeAddRecipeStart = () => {
+  return {
+    type: actionTypes.RECIPE_ADD_TO_MY_RECIPE_START,
+  };
+};
+
+const recipeAddRecipeSuccess = (data) => {
+  return {
+    type: actionTypes.RECIPE_ADD_TO_MY_RECIPE_SUCCESS,
+    data: data,
+  };
+};
+
+const recipeAddRecipeFail = () => {
+  return {
+    type: actionTypes.RECIPE_ADD_TO_MY_RECIPE_FAIL,
+  };
+};
+
+export const recipeShowForm = () => {
+  return {
+    type: actionTypes.RECIPE_SHOW_FORM,
+  };
+};
+
+export const recipeHideForm = () => {
+  return {
+    type: actionTypes.RECIPE_HIDE_FORM,
+  };
+};
+
+//Submiting recipe to the server and saving it in the local state
+
+export const submitRecipe = (data, token, userId) => {
+  return (dispatch, getState) => {
+    dispatch(recipeAddRecipeStart());
+    dispatch(recipeAddRecipeSuccess(data));
+    axios
+      .post(
+        "https://react-forkify-default-rtdb.firebaseio.com/recipe/" +
+          userId +
+          ".json?auth=" +
+          token,
+        [...getState().recipe.userRecipe]
+      )
+      .then((response) => {
+        // console.log(response);
+        // dispatch(recipeAddRecipeSuccess(data));
+        dispatch(recipeHideForm());
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(recipeAddRecipeFail());
+      });
+  };
+};
+
+// Fetching userRecipe on Login
+
+const setUserRecipeOnLogin = (data) => {
+  return {
+    type: actionTypes.RECIPE_SET_MY_RECIPE_ON_LOGIN,
+    data: data,
+  };
+};
+
+export const fetchUserRecipe = (token, userId) => {
+  return (dispatch) => {
+    axios
+      .get(
+        "https://react-forkify-default-rtdb.firebaseio.com/recipe/" +
+          userId +
+          ".json?auth=" +
+          token
+      )
+      .then((response) => {
+        // console.log("Setting user recipe on login");
+        // console.log(response);
+        dispatch(setUserRecipeOnLogin(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+};

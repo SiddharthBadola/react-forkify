@@ -18,6 +18,7 @@ class RecipeDisplay extends React.Component {
           (recipe) => recipe.id === this.props.match.params.id
         )
       : null,
+    id: null,
   };
 
   userRecipeChecker() {
@@ -30,6 +31,12 @@ class RecipeDisplay extends React.Component {
       // console.log("inside if");
       this.props.onFetchSummary(this.props.match.params.id);
       this.props.onInitIsBookmarked(this.props.match.params.id);
+      /* For Scrolling to the target element */
+      console.log(this.props);
+      // const query = new URLSearchParams(this.props.location.search);
+      // for (let param of query) {
+      //   console.log(param);
+      // }
     }
     // if (this.props.auth) {
     //   this.props.onFetchBookmarkOnInit(this.props.token, this.props.userId);
@@ -73,7 +80,7 @@ class RecipeDisplay extends React.Component {
       (Boolean(this.state.currentUserRecipe) || !this.props.error)
     )
       recipeDisplay = (
-        <div className={classes.RecipeDisplay}>
+        <div className={classes.RecipeDisplay} id="Recipe-Display">
           <RecipeDisplayHeader
             // imageUrl={this.props.recipeSummary.image_url}
             imageUrl={

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./RecipeListItem.module.css";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+import { NavHashLink as NavLink } from "react-router-hash-link";
 
 const recipeListItem = (props) => {
   return (
@@ -10,7 +11,13 @@ const recipeListItem = (props) => {
       // onClick={() => props.click(props.id, props.history, props.match)}
     >
       <NavLink
-        to={props.match.url + "/summary" + props.id}
+        // to={props.match.url + "/summary#Recipe-Display/" + props.id}
+        smooth
+        to={{
+          hash: "#Recipe-Display",
+          pathname: props.match.url + "/summary" + props.id,
+          // search: "?id=" + props.id,
+        }}
         className={classes.RecipeListItem}
         activeClassName={classes.Active}
       >

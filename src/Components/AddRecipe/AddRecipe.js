@@ -2,12 +2,24 @@ import React from "react";
 import classes from "./AddRecipe.module.css";
 import AddRecipeCard from "./AddRecipeCard/AddRecipeCard";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import * as actions from "../../store/action/index";
 
 class AddRecipe extends React.Component {
+  componentDidMount() {
+    localStorage.setItem("path", "add-recipe");
+  }
+
+  componentWillUnmount() {
+    localStorage.setItem("path", "/");
+  }
+
   render() {
+    let redirect = null;
+    if (!Boolean(this.props.token)) redirect = <Redirect to="/" />;
     return (
       <div className={classes.AddRecipe}>
+        {redirect}
         <AddRecipeCard
           clicked={this.props.onShowFormHandler}
           showForm={this.props.showForm}

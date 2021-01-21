@@ -7,7 +7,7 @@ import RecipeListItems from "./Container/RecipeListItems/RecipeListItems";
 import SideDrawer from "./Components/Header/SideDrawer/SideDrawer";
 import * as actions from "./store/action/index";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Login from "./Container/Login/Login";
 import Bookmark from "./Container/Bookmark/Bookmark";
 import RecipeDisplay from "./Container/RecipeDisplay/RecipeDisplay";
@@ -20,21 +20,13 @@ class App extends React.Component {
     this.observer = null;
   }
   state = {
-    // recipe: null,
-    // input: "",
-    // error: null,
     fix: false,
-    // loading: falsprops loading: false,
-    // currentPage: 1,
-    // recipeSummary: null,
     showSideDrawer: false,
-    // searching: false,
   };
 
   componentDidMount() {
-    // console.log("[App.js] in componentDidMount");
+    console.log("[App.js] in componentDidMount");
     // const tog = !this.state.toggle;
-
     const options = {
       root: null,
       rootMargin: "80px 0px 0px 0px",
@@ -49,7 +41,9 @@ class App extends React.Component {
 
     this.observer.observe(this.testRef.current);
 
-    this.props.onInit();
+    // if (this.props.auth) localStorage.setItem("path", "/");
+
+    this.props.onInit(this.props.history);
   }
 
   inputChangeHandler = (e) => {
@@ -131,9 +125,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     checkSearchState: (element) => dispatch(actions.checkSearchState(element)),
     onExitModal: () => dispatch(actions.exitSearchModal()),
-    onInit: () => dispatch(actions.checkStateToken()),
+    onInit: (history) => dispatch(actions.checkStateToken(history)),
     // onFetchBookmarkOnInit: (tokken, userId)=>dispatch(actions.fetchBookmarkOnInit(tokken,userId))
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

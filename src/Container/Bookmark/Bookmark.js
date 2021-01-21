@@ -9,23 +9,28 @@ class Bookmark extends React.Component {
   componentDidMount() {
     // console.log(this.props.bookmark.length);
     // console.log("[Bookmark.js] ComponentDidMount");
-    if (
-      this.props.bookmark.length !== 0 &&
-      !this.props.bookmarkedRecipeSummary
-    ) {
-      this.props.fetchSummary(this.props.bookmark);
-    }
+    // if (
+    //   this.props.bookmark.length !== 0 &&
+    //   !this.props.bookmarkedRecipeSummary
+    // ) {
+    //   this.props.fetchSummary(this.props.bookmark);
+    // }
     // this.props.recipeListResetError();
+    localStorage.setItem("path", "/bookmark");
   }
   componentDidUpdate(prevProps) {
     // console.log("[Bookmark.js] ComponentDidUpdate");
-    if (prevProps.bookmark !== this.props.bookmark) {
+    if (
+      prevProps.bookmark !== this.props.bookmark
+      // || prevProps.bookmarkedRecipeSummary !== this.props.bookmarkedRecipeSummary
+    ) {
       this.props.fetchSummary(this.props.bookmark);
     }
   }
 
   componentWillUnmount() {
     // console.log("[Bookmark.js] ComponentWillUmount");
+    localStorage.setItem("path", "/");
   }
   render() {
     let content;

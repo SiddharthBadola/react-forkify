@@ -8,7 +8,8 @@ const paragraph = (props) => {
     </p>
   );
   if (props.error)
-    p = <p className={classes.Paragraph}>{props.error.message}</p>;
+    // p = <p className={classes.Paragraph}>{props.error.message}</p>;
+    p = <p className={classes.Paragraph}>Try searching for pizza or pasta</p>;
   return p;
 };
 

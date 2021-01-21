@@ -34,6 +34,7 @@ export const authSignOut = (history = null) => {
   localStorage.removeItem("userId");
   localStorage.removeItem("loginTime");
   localStorage.removeItem("expiresIn");
+  localStorage.removeItem("path");
 
   if (history) {
     history.replace("/");
@@ -130,7 +131,7 @@ const authInit = (token, userId) => {
   };
 };
 
-export const checkStateToken = () => {
+export const checkStateToken = (history) => {
   return (dispatch, getState) => {
     if (!localStorage.getItem("token")) return;
 
@@ -149,7 +150,8 @@ export const checkStateToken = () => {
           (expiresInTime - new Date().getTime()) / 1000
         )
       );
-
+      console.log("redirect from onInit");
+      const path = localStorage.getItem("path");
       // fetching bookmark from firebase on reload
       axios
         .get(
@@ -164,6 +166,7 @@ export const checkStateToken = () => {
 
           // fetching summary on reload
           fetchSummaryForBookmark(getState().recipe.bookmark)(dispatch);
+          history.push(path);
         })
         .catch((error) => {
           console.log(error);

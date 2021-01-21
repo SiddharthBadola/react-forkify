@@ -7,6 +7,7 @@ const initialState = {
   error: null,
   expireTime: null,
   loading: false,
+  path: "/",
 };
 
 const authStart = (state) => {
